@@ -223,6 +223,9 @@ import {
   HiOutlineSparkles,
   HiOutlineFire,
   HiOutlineTag,
+   HiOutlineBell,
+  HiOutlineLocationMarker,
+  HiOutlineColorSwatch, 
 } from "react-icons/hi";
 import {
   selectCurrentUser,
@@ -233,7 +236,7 @@ import {
 import { selectCartItemsCount } from "../../features/cart/cartSlice";
 import { useLogoutApiMutation } from "../../features/auth/authApiSlice";
 import { apiSlice } from "../../features/api/apiSlice";
-
+import NotificationBell from "../../pages/NotificationBell";
 /* ───────── NAV LINKS ───────── */
 const SHOP_LINKS = [
   {
@@ -371,17 +374,15 @@ export default function Navbar() {
       `}</style>
 
       <nav
-        className={`sticky top-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-black/80 backdrop-blur-2xl border-b border-white/[.06] shadow-[0_4px_30px_rgba(0,0,0,.5)]"
-            : "bg-transparent border-b border-white/[.03]"
-        }`}
+        className={`sticky top-0 z-50 transition-all duration-500 ${scrolled
+          ? "bg-black/80 backdrop-blur-2xl border-b border-white/[.06] shadow-[0_4px_30px_rgba(0,0,0,.5)]"
+          : "bg-transparent border-b border-white/[.03]"
+          }`}
       >
         {/* ── TOP ANNOUNCEMENT BAR ── */}
         <div
-          className={`bg-primary/10 border-b border-primary/10 overflow-hidden transition-all duration-500 ${
-            scrolled ? "h-0 opacity-0" : "h-8 opacity-100"
-          }`}
+          className={`bg-primary/10 border-b border-primary/10 overflow-hidden transition-all duration-500 ${scrolled ? "h-0 opacity-0" : "h-8 opacity-100"
+            }`}
         >
           <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-center">
             <p className="text-[10px] sm:text-xs text-primary font-bold tracking-[.2em] uppercase">
@@ -428,17 +429,15 @@ export default function Navbar() {
                   <button
                     onClick={() => setShopOpen(!shopOpen)}
                     className={`flex items-center gap-1 px-3 py-2 text-sm font-semibold rounded-lg
-                      transition-all duration-300 cursor-pointer ${
-                        shopOpen
-                          ? "text-primary bg-primary/5"
-                          : "text-gray-400 hover:text-white hover:bg-white/5"
+                      transition-all duration-300 cursor-pointer ${shopOpen
+                        ? "text-primary bg-primary/5"
+                        : "text-gray-400 hover:text-white hover:bg-white/5"
                       }`}
                   >
                     Shop
                     <HiOutlineChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                        shopOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-3.5 h-3.5 transition-transform duration-300 ${shopOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
 
@@ -561,11 +560,10 @@ export default function Navbar() {
               {/* Search toggle */}
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className={`p-2.5 rounded-xl transition-all duration-300 cursor-pointer ${
-                  searchOpen
-                    ? "text-primary bg-primary/10"
-                    : "text-gray-400 hover:text-white hover:bg-white/5"
-                }`}
+                className={`p-2.5 rounded-xl transition-all duration-300 cursor-pointer ${searchOpen
+                  ? "text-primary bg-primary/10"
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
+                  }`}
                 aria-label="Search"
               >
                 {searchOpen ? (
@@ -586,6 +584,7 @@ export default function Navbar() {
                   >
                     <HiOutlineHeart className="w-5 h-5" />
                   </Link>
+                  <NotificationBell />
 
                   {/* Cart */}
                   <Link
@@ -612,18 +611,16 @@ export default function Navbar() {
                     <button
                       onClick={() => setProfileOpen(!profileOpen)}
                       className={`flex items-center gap-2 p-1.5 pr-3 rounded-xl transition-all
-                        duration-300 cursor-pointer ${
-                          profileOpen
-                            ? "bg-primary/10 text-white"
-                            : "hover:bg-white/5 text-gray-400 hover:text-white"
+                        duration-300 cursor-pointer ${profileOpen
+                          ? "bg-primary/10 text-white"
+                          : "hover:bg-white/5 text-gray-400 hover:text-white"
                         }`}
                     >
                       <div
                         className={`w-8 h-8 rounded-lg flex items-center justify-center
-                          transition-all duration-300 ${
-                            profileOpen
-                              ? "bg-primary text-black"
-                              : "bg-gradient-to-br from-primary/20 to-primary/5 text-primary"
+                          transition-all duration-300 ${profileOpen
+                            ? "bg-primary text-black"
+                            : "bg-gradient-to-br from-primary/20 to-primary/5 text-primary"
                           }`}
                       >
                         <span className="font-bold text-sm">
@@ -634,9 +631,8 @@ export default function Navbar() {
                         {user?.name?.split(" ")[0]}
                       </span>
                       <HiOutlineChevronDown
-                        className={`w-3 h-3 hidden sm:block transition-transform duration-300 ${
-                          profileOpen ? "rotate-180" : ""
-                        }`}
+                        className={`w-3 h-3 hidden sm:block transition-transform duration-300 ${profileOpen ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
 
@@ -700,6 +696,12 @@ export default function Navbar() {
                             desc="Saved items"
                             onClick={() => setProfileOpen(false)}
                           />
+                          <DropdownLink to="/addresses" icon={HiOutlineLocationMarker} label="Addresses"
+                            desc="Manage addresses" onClick={() => setProfileOpen(false)} />
+                          <DropdownLink to="/my-designs" icon={HiOutlineColorSwatch} label="My Designs"
+                            desc="Custom tees" onClick={() => setProfileOpen(false)} />
+                          <DropdownLink to="/notifications" icon={HiOutlineBell} label="Notifications"
+                            desc="Updates & alerts" onClick={() => setProfileOpen(false)} />
                           {isAdmin && (
                             <>
                               <div className="mx-3 my-1 border-t border-white/[.05]" />
@@ -1023,6 +1025,9 @@ export default function Navbar() {
                       { to: "/profile", icon: HiOutlineUser, label: "My Profile" },
                       { to: "/my-orders", icon: HiOutlineClipboardList, label: "My Orders" },
                       { to: "/wishlist", icon: HiOutlineHeart, label: "Wishlist" },
+                      { to: "/addresses", icon: HiOutlineLocationMarker, label: "Addresses" },
+                      { to: "/my-designs", icon: HiOutlineColorSwatch, label: "My Designs" },
+                      { to: "/notifications", icon: HiOutlineBell, label: "Notifications" },
                       ...(isAdmin
                         ? [{ to: "/admin", icon: HiOutlineCog, label: "Admin Panel" }]
                         : []),
@@ -1095,18 +1100,16 @@ function DropdownLink({ to, icon: Icon, label, desc, onClick, accent }) {
       to={to}
       onClick={onClick}
       className={`flex items-center gap-3 px-3 py-2.5 mx-2 rounded-lg text-sm
-        transition-all duration-300 group/dl ${
-          accent
-            ? "text-purple-400 hover:bg-purple-500/10"
-            : "text-gray-300 hover:text-white hover:bg-white/5"
+        transition-all duration-300 group/dl ${accent
+          ? "text-purple-400 hover:bg-purple-500/10"
+          : "text-gray-300 hover:text-white hover:bg-white/5"
         }`}
     >
       <div
         className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0
-          transition-colors ${
-            accent
-              ? "bg-purple-500/10 group-hover/dl:bg-purple-500/20"
-              : "bg-white/5 group-hover/dl:bg-white/10"
+          transition-colors ${accent
+            ? "bg-purple-500/10 group-hover/dl:bg-purple-500/20"
+            : "bg-white/5 group-hover/dl:bg-white/10"
           }`}
       >
         <Icon className="w-4 h-4" />

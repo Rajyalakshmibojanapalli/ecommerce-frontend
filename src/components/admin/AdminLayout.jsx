@@ -1,87 +1,127 @@
-import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+// components/admin/AdminLayout.jsx
+import { NavLink, Outlet } from "react-router-dom";
 import {
-  HiOutlineChartBar, HiOutlineShoppingBag, HiOutlineClipboardList,
-  HiOutlineTag, HiOutlineTicket, HiOutlineUsers, HiOutlineArrowLeft,
-  HiOutlineMenu, HiOutlineX,
+  HiOutlineViewGrid,
+  HiOutlineCube,
+  HiOutlineClipboardList,
+  HiOutlineTag,
+  HiOutlineUsers,
+  HiOutlineTicket,
+  HiOutlineMail,
+  HiOutlineChatAlt2,
+  HiOutlinePencilAlt,
+  HiOutlinePhotograph,
+  HiOutlineColorSwatch,
+  HiOutlineDocumentText,
+  HiOutlineArrowLeft,
 } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
-const menuItems = [
-  { path: "/admin", icon: HiOutlineChartBar, label: "Dashboard" },
-  { path: "/admin/products", icon: HiOutlineShoppingBag, label: "Products" },
-  { path: "/admin/orders", icon: HiOutlineClipboardList, label: "Orders" },
-  { path: "/admin/categories", icon: HiOutlineTag, label: "Categories" },
-  { path: "/admin/coupons", icon: HiOutlineTicket, label: "Coupons" },
-  { path: "/admin/users", icon: HiOutlineUsers, label: "Users" },
+const NAV_SECTIONS = [
+  {
+    title: "Overview",
+    links: [
+      { to: "/admin", icon: HiOutlineViewGrid, label: "Dashboard", end: true },
+    ],
+  },
+  {
+    title: "Store",
+    links: [
+      { to: "/admin/products", icon: HiOutlineCube, label: "Products" },
+      { to: "/admin/orders", icon: HiOutlineClipboardList, label: "Orders" },
+      { to: "/admin/categories", icon: HiOutlineTag, label: "Categories" },
+      { to: "/admin/coupons", icon: HiOutlineTicket, label: "Coupons" },
+      { to: "/admin/users", icon: HiOutlineUsers, label: "Users" },
+    ],
+  },
+  {
+    title: "Content",
+    links: [
+      { to: "/admin/banners", icon: HiOutlinePhotograph, label: "Banners" },
+      { to: "/admin/blogs", icon: HiOutlinePencilAlt, label: "Blog Posts" },
+      { to: "/admin/pages", icon: HiOutlineDocumentText, label: "Static Pages" },
+    ],
+  },
+  {
+    title: "Engagement",
+    links: [
+      { to: "/admin/newsletter", icon: HiOutlineMail, label: "Newsletter" },
+      { to: "/admin/contacts", icon: HiOutlineChatAlt2, label: "Contact Msgs" },
+      {
+        to: "/admin/custom-designs",
+        icon: HiOutlineColorSwatch,
+        label: "Custom Designs",
+      },
+    ],
+  },
 ];
 
 export default function AdminLayout() {
-  const { pathname } = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
-    <div className="min-h-screen bg-dark flex">
-      {/* Mobile Overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
+    <div className="flex min-h-screen bg-black">
       {/* Sidebar */}
       <aside
-        className={`
-          fixed md:static inset-y-0 left-0 z-50
-          w-64 bg-black border-r border-dark-border
-          flex flex-col transition-transform duration-300
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
-        `}
+        className="w-64 bg-gray-950/80 border-r border-white/[.06] flex flex-col
+          fixed top-0 left-0 h-screen z-30 overflow-y-auto"
       >
-        <div className="p-6 flex items-center justify-between">
-          <Link to="/admin" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-black font-bold">A</span>
+        {/* Logo */}
+        <div className="p-5 border-b border-white/[.06]">
+          <Link to="/admin" className="flex items-center gap-2.5">
+            <div
+              className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-emerald-400
+                flex items-center justify-center"
+            >
+              <span className="text-black font-black text-sm">J</span>
             </div>
-            <span className="text-lg font-bold text-white">Admin Panel</span>
+            <div className="flex flex-col leading-none">
+              <span className="text-base font-black text-white tracking-tight">
+                JAI<span className="text-primary">MAX</span>
+              </span>
+              <span className="text-[8px] text-gray-600 tracking-[.3em] uppercase font-bold">
+                Admin Panel
+              </span>
+            </div>
           </Link>
-          <button
-            onClick={() => setSidebarOpen(false)}
-            className="md:hidden text-gray-400 cursor-pointer"
-          >
-            <HiOutlineX className="w-6 h-6" />
-          </button>
         </div>
 
-        <nav className="px-3 space-y-1 flex-1">
-          {menuItems.map((item) => {
-            const active =
-              pathname === item.path ||
-              (item.path !== "/admin" && pathname.startsWith(item.path));
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setSidebarOpen(false)}
-                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition
-                  ${
-                    active
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-gray-400 hover:text-white hover:bg-dark-lighter"
-                  }`}
-              >
-                <item.icon className="w-5 h-5" />
-                {item.label}
-              </Link>
-            );
-          })}
+        {/* Navigation */}
+        <nav className="flex-1 px-3 py-4 space-y-6">
+          {NAV_SECTIONS.map((section) => (
+            <div key={section.title}>
+              <p className="text-[10px] text-gray-600 tracking-[.25em] uppercase font-bold px-3 mb-2">
+                {section.title}
+              </p>
+              <div className="space-y-0.5">
+                {section.links.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    end={link.end}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold
+                        transition-all duration-200 ${
+                          isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-gray-500 hover:text-white hover:bg-white/[.04]"
+                        }`
+                    }
+                  >
+                    <link.icon className="w-5 h-5 flex-shrink-0" />
+                    {link.label}
+                  </NavLink>
+                ))}
+              </div>
+            </div>
+          ))}
         </nav>
 
-        <div className="p-3 border-t border-dark-border">
+        {/* Back to store */}
+        <div className="p-3 border-t border-white/[.06]">
           <Link
             to="/"
-            className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-500 
-              hover:text-white transition"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm
+              text-gray-500 hover:text-primary hover:bg-primary/5
+              font-semibold transition-all"
           >
             <HiOutlineArrowLeft className="w-5 h-5" />
             Back to Store
@@ -90,22 +130,22 @@ export default function AdminLayout() {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Mobile Top Bar */}
-        <div className="md:hidden bg-black border-b border-dark-border px-4 py-3 flex items-center gap-3">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="text-gray-400 cursor-pointer"
-          >
-            <HiOutlineMenu className="w-6 h-6" />
-          </button>
-          <span className="text-white font-semibold">Admin Panel</span>
-        </div>
+      <main className="flex-1 ml-64">
+        {/* Top bar */}
+        <header
+          className="sticky top-0 z-20 h-14 bg-black/80 backdrop-blur-xl
+            border-b border-white/[.06] flex items-center px-6"
+        >
+          <h2 className="text-sm font-bold text-gray-400">
+            Admin Panel
+          </h2>
+        </header>
 
-        <main className="flex-1 p-6 md:p-8 overflow-x-hidden">
+        {/* Page content */}
+        <div className="p-6">
           <Outlet />
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
