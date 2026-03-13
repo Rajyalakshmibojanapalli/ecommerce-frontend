@@ -717,7 +717,7 @@ export default function Home() {
             </h1>
 
             {/* subtitle */}
-            <p
+            {/* <p
               className={`text-base md:text-lg text-gray-500 max-w-lg mb-10
                 transition-all duration-1000 delay-[1100ms]
                 ${heroReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -727,10 +727,10 @@ export default function Home() {
               <strong className="text-white">Men</strong>,{" "}
               <strong className="text-white">Women</strong> &amp;{" "}
               <strong className="text-white">Kids</strong>.
-            </p>
+            </p> */}
 
             {/* CTA */}
-            <div
+            {/* <div
               className={`flex flex-wrap gap-4 transition-all duration-1000 delay-[1300ms]
                 ${heroReady ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
@@ -755,7 +755,7 @@ export default function Home() {
                   TRY ON COLORS
                 </button>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -904,182 +904,350 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
            TRY ON — SKIN TONE + CLOTHING MATCHER
          ═══════════════════════════════════════════ */}
-      <section
-        id="try-on"
-        className="py-28 bg-gradient-to-b from-black via-gray-950/80 to-black"
+{/* ═══════════════════════════════════════════════════════
+    TRY-ON  —  Editorial / Lookbook Style
+    ═══════════════════════════════════════════════════════ */}
+<section
+  id="try-on"
+  className="relative py-32 overflow-hidden bg-[#060606]"
+>
+  {/* ── subtle noise texture ── */}
+  <div
+    className="pointer-events-none absolute inset-0 opacity-[0.035]"
+    style={{
+      backgroundImage:
+        "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+    }}
+  />
+
+  {/* ── giant watermark ── */}
+  <span className="pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[28vw] font-black text-white/[0.015] tracking-[-0.06em] whitespace-nowrap">
+    LOOKBOOK
+  </span>
+
+  {/* ── horizontal rule top ── */}
+  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+  <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-8">
+    {/* ═══ HEADER ═══ */}
+    <Reveal>
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
+        <div>
+          <div className="flex items-center gap-3 mb-5">
+            <span className="w-10 h-[2px] bg-primary" />
+            <span className="text-primary text-[10px] tracking-[.45em] uppercase font-semibold">
+              Interactive Try-On
+            </span>
+          </div>
+
+          <h2 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white tracking-[-0.04em] leading-[0.9]">
+            Find Your
+            <br />
+            <span className="italic font-light tracking-[-0.02em] text-transparent bg-clip-text bg-gradient-to-r from-white/60 to-white/20">
+              Perfect&nbsp;
+            </span>
+            <span className="text-primary">Match</span>
+          </h2>
+        </div>
+
+        <p className="text-gray-500 text-sm leading-relaxed max-w-xs md:text-right">
+          Pick a model, dial in your skin tone, and preview
+          <br className="hidden md:block" />
+          outfit colours that truly complement&nbsp;you.
+        </p>
+      </div>
+    </Reveal>
+
+    {/* ═══ MAIN CARD ═══ */}
+    <Reveal delay={150}>
+      <div
+        className="relative rounded-[2rem] border border-white/[0.06]
+          bg-gradient-to-br from-white/[0.04] to-transparent
+          backdrop-blur-md shadow-[0_0_80px_rgba(0,0,0,.6)] overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4">
-          {/* heading */}
-          <Reveal>
-            <div className="text-center mb-20">
-              <span className="text-primary text-xs tracking-[.35em] uppercase font-semibold">
-                Interactive Try-On
-              </span>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mt-4 tracking-tight leading-[.95]">
-                FIND YOUR{" "}
-                <span className="text-outline text-white/20">PERFECT</span>
-                <br className="hidden md:block" /> COLOR MATCH
-              </h2>
-              <p className="text-gray-500 mt-5 max-w-xl mx-auto text-lg">
-                Pick a person, choose your skin tone, and try different clothing colours.
-                Watch the outfit change in real time.
-              </p>
+        {/* ambient glow behind the card */}
+        <div
+          className="pointer-events-none absolute -bottom-32 left-1/2 -translate-x-1/2
+            w-[50%] h-72 rounded-full blur-[120px] opacity-20 transition-colors duration-700"
+          style={{ backgroundColor: CLOTH_COLORS[clothIdx].hex }}
+        />
+
+        <div className="grid lg:grid-cols-12 min-h-[620px]">
+          {/* ─── LEFT: Person display ─── */}
+          <div className="lg:col-span-5 relative flex items-center justify-center p-10 lg:p-16">
+            {/* concentric rings */}
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              {[320, 240, 160].map((s) => (
+                <div
+                  key={s}
+                  className="absolute rounded-full border border-white/[0.04]"
+                  style={{ width: s, height: s }}
+                />
+              ))}
             </div>
-          </Reveal>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* ─ LEFT: Controls ─ */}
-            <Reveal direction="left" delay={200}>
-              <div className="space-y-10">
-                {/* person type toggle */}
-                <div>
-                  <p className="text-[10px] text-gray-600 tracking-[.25em] uppercase mb-3 font-bold">
-                    Person
-                  </p>
-                  <div className="flex gap-3">
-                    {[
-                      { id: "man", emoji: "👨", label: "Man" },
-                      { id: "woman", emoji: "👩", label: "Woman" },
-                      { id: "kid", emoji: "🧒", label: "Kid" },
-                    ].map((p) => (
-                      <button
-                        key={p.id}
-                        onClick={() => setPerson(p.id)}
-                        className={`flex items-center gap-2 px-5 py-3 rounded-xl border text-sm
-                          font-bold transition-all duration-300 ${
-                            person === p.id
-                              ? "border-primary bg-primary/10 text-primary scale-105"
-                              : "border-white/10 text-gray-500 hover:border-white/20 hover:text-gray-300"
-                          }`}
-                      >
-                        <span className="text-lg">{p.emoji}</span>
-                        {p.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+            {/* color glow */}
+            <div
+              className="absolute w-56 h-56 sm:w-72 sm:h-72 rounded-full blur-[100px] opacity-25
+                transition-colors duration-700"
+              style={{ backgroundColor: CLOTH_COLORS[clothIdx].hex }}
+            />
 
-                {/* skin tone selector */}
-                <div>
-                  <p className="text-[10px] text-gray-600 tracking-[.25em] uppercase mb-3 font-bold">
-                    Skin Tone — {SKIN_TONES[skinIdx].name}
-                  </p>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    {SKIN_TONES.map((t, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setSkinIdx(i)}
-                        className={`w-12 h-12 rounded-full transition-all duration-500 ${
-                          skinIdx === i
-                            ? "ring-[3px] ring-primary ring-offset-[4px] ring-offset-gray-950 scale-110"
-                            : "opacity-50 hover:opacity-90 hover:scale-105"
+            {/* person figure */}
+            <div className="relative z-10 w-48 sm:w-56 lg:w-64 transition-all duration-500">
+              <PersonFigure
+                type={person}
+                skinColor={SKIN_TONES[skinIdx].hex}
+                clothColor={CLOTH_COLORS[clothIdx].hex}
+              />
+            </div>
+
+            {/* floating recommendation chips */}
+            {bestColors.slice(0, 3).map((ci, i) => (
+              <button
+                key={ci}
+                onClick={() => setClothIdx(ci)}
+                className="absolute w-9 h-9 rounded-full shadow-2xl float
+                  hover:scale-[1.35] transition-all duration-300 ring-2 ring-black/30"
+                style={{
+                  backgroundColor: CLOTH_COLORS[ci].hex,
+                  top: `${14 + i * 24}%`,
+                  [i % 2 === 0 ? "right" : "left"]: "8%",
+                  animationDelay: `${i * 1.4}s`,
+                }}
+                title={`Try ${CLOTH_COLORS[ci].name}`}
+              />
+            ))}
+
+            {/* label badge */}
+            <div
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-2
+                rounded-full bg-black/60 backdrop-blur-md border border-white/10
+                text-[10px] tracking-[.2em] uppercase text-gray-400 font-semibold
+                flex items-center gap-2 whitespace-nowrap"
+            >
+              <span
+                className="w-2.5 h-2.5 rounded-full transition-colors duration-500"
+                style={{ backgroundColor: CLOTH_COLORS[clothIdx].hex }}
+              />
+              {person === "man" ? "Man" : person === "woman" ? "Woman" : "Kid"}
+              &nbsp;·&nbsp;
+              <span style={{ color: CLOTH_COLORS[clothIdx].hex }}>
+                {CLOTH_COLORS[clothIdx].name}
+              </span>
+            </div>
+          </div>
+
+          {/* ─── VERTICAL DIVIDER ─── */}
+          <div className="hidden lg:flex items-center">
+            <div className="w-px h-[75%] bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+          </div>
+
+          {/* ─── RIGHT: Controls ─── */}
+          <div className="lg:col-span-6 flex flex-col justify-center gap-10 p-8 sm:p-10 lg:p-14">
+            {/* MODEL SELECTOR */}
+            <Reveal direction="right" delay={250}>
+              <div>
+                <p className="text-[10px] text-gray-500 tracking-[.35em] uppercase font-bold mb-4">
+                  Model
+                </p>
+
+                <div className="flex gap-3">
+                  {[
+                    { id: "man", emoji: "👨", label: "Man" },
+                    { id: "woman", emoji: "👩", label: "Woman" },
+                    { id: "kid", emoji: "🧒", label: "Kid" },
+                  ].map((p) => (
+                    <button
+                      key={p.id}
+                      onClick={() => setPerson(p.id)}
+                      className={`relative flex-1 flex flex-col items-center gap-1.5 py-4 rounded-2xl
+                        border text-sm font-bold transition-all duration-300 ${
+                          person === p.id
+                            ? "border-primary/40 bg-primary/[0.07] text-primary shadow-[0_0_20px_rgba(var(--primary-rgb),.08)]"
+                            : "border-white/[0.06] text-gray-600 hover:border-white/10 hover:text-gray-400"
                         }`}
-                        style={{ backgroundColor: t.hex }}
-                        title={t.name}
-                      />
-                    ))}
-                  </div>
+                    >
+                      <span className="text-2xl">{p.emoji}</span>
+                      <span className="text-[11px]">{p.label}</span>
+                      {person === p.id && (
+                        <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-primary rounded-full border-2 border-[#060606]" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            {/* SKIN TONE */}
+            <Reveal direction="right" delay={350}>
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-[10px] text-gray-500 tracking-[.35em] uppercase font-bold">
+                    Skin Tone
+                  </p>
+                  <span className="text-[11px] text-white/60 font-medium">
+                    {SKIN_TONES[skinIdx].name}
+                  </span>
                 </div>
 
-                {/* clothing colour selector */}
-                <div>
-                  <p className="text-[10px] text-gray-600 tracking-[.25em] uppercase mb-3 font-bold">
-                    Clothing Colour — {CLOTH_COLORS[clothIdx].name}
+                {/* strip selector */}
+                <div className="flex h-11 rounded-xl overflow-hidden border border-white/[0.06]">
+                  {SKIN_TONES.map((t, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSkinIdx(i)}
+                      className={`relative flex-1 transition-all duration-500 ${
+                        skinIdx === i ? "flex-[2] z-10" : "hover:flex-[1.3]"
+                      }`}
+                      style={{ backgroundColor: t.hex }}
+                      title={t.name}
+                    >
+                      {skinIdx === i && (
+                        <span className="absolute inset-0 ring-2 ring-primary ring-inset rounded-lg" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            {/* CLOTHING COLOUR */}
+            <Reveal direction="right" delay={450}>
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-[10px] text-gray-500 tracking-[.35em] uppercase font-bold">
+                    Clothing Colour
                   </p>
-                  <div className="grid grid-cols-6 gap-3">
-                    {CLOTH_COLORS.map((cl, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setClothIdx(i)}
-                        className={`group relative w-full aspect-square rounded-xl transition-all
-                          duration-300 hover:scale-110 ${
-                            clothIdx === i
-                              ? "ring-[3px] ring-primary ring-offset-[3px] ring-offset-gray-950 scale-110"
-                              : "opacity-50 hover:opacity-90"
-                          }`}
-                        style={{ backgroundColor: cl.hex }}
-                        title={cl.name}
-                      >
-                        {/* recommended badge */}
-                        {bestColors.includes(i) && (
-                          <span
-                            className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full
-                              border-2 border-gray-950"
-                          />
-                        )}
-                      </button>
-                    ))}
+                  <span
+                    className="text-[11px] font-medium transition-colors duration-300"
+                    style={{ color: CLOTH_COLORS[clothIdx].hex }}
+                  >
+                    {CLOTH_COLORS[clothIdx].name}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-6 sm:grid-cols-8 gap-2.5">
+                  {CLOTH_COLORS.map((cl, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setClothIdx(i)}
+                      className={`group relative aspect-square rounded-xl transition-all duration-300
+                        ${
+                          clothIdx === i
+                            ? "scale-[1.15] z-10 shadow-xl"
+                            : "opacity-40 hover:opacity-90 hover:scale-110"
+                        }`}
+                      style={{
+                        backgroundColor: cl.hex,
+                        boxShadow:
+                          clothIdx === i
+                            ? `0 6px 24px ${cl.hex}50`
+                            : "none",
+                      }}
+                      title={cl.name}
+                    >
+                      {clothIdx === i && (
+                        <span className="absolute inset-0 rounded-xl ring-[2.5px] ring-white/70" />
+                      )}
+                      {bestColors.includes(i) && (
+                        <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-primary rounded-full border-2 border-[#111]" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                <p className="text-[10px] text-gray-600 mt-3 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-primary inline-block" />
+                  Recommended for&nbsp;
+                  <span className="text-gray-400">{SKIN_TONES[skinIdx].name}</span>
+                  &nbsp;skin
+                </p>
+              </div>
+            </Reveal>
+
+            {/* ── STYLE SUMMARY + CTA row ── */}
+            <Reveal direction="right" delay={550}>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pt-4 border-t border-white/[0.06]">
+                {/* mini swatches summary */}
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2">
+                    <div
+                      className="w-9 h-9 rounded-full border-2 border-[#111]"
+                      style={{ backgroundColor: SKIN_TONES[skinIdx].hex }}
+                      title="Skin"
+                    />
+                    <div
+                      className="w-9 h-9 rounded-full border-2 border-[#111] transition-colors duration-500"
+                      style={{ backgroundColor: CLOTH_COLORS[clothIdx].hex }}
+                      title="Outfit"
+                    />
                   </div>
-                  <p className="text-[10px] text-gray-600 mt-3 flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-primary inline-block" />
-                    Recommended for {SKIN_TONES[skinIdx].name} skin
-                  </p>
+                  <div>
+                    <p className="text-[10px] text-gray-600 leading-none">Combination</p>
+                    <p className="text-xs text-white/70 font-semibold mt-0.5">
+                      {SKIN_TONES[skinIdx].name} × {CLOTH_COLORS[clothIdx].name}
+                    </p>
+                  </div>
                 </div>
 
                 {/* shop CTA */}
                 <Link
                   to="/products"
-                  className="inline-flex items-center gap-2 text-primary text-sm font-bold
-                    group hover:gap-3 transition-all"
+                  className="ml-auto group relative inline-flex items-center gap-2
+                    px-7 py-3.5 rounded-full bg-primary text-black text-sm font-bold
+                    overflow-hidden transition-shadow duration-300
+                    hover:shadow-[0_0_30px_rgba(var(--primary-rgb),.35)]"
                 >
+                  {/* shine sweep */}
+                  <span
+                    className="pointer-events-none absolute inset-0 -translate-x-full
+                      bg-gradient-to-r from-transparent via-white/25 to-transparent
+                      group-hover:translate-x-full transition-transform duration-700"
+                  />
                   Shop This Look
                   <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </Reveal>
-
-            {/* ─ RIGHT: Person Figure ─ */}
-            <Reveal direction="right" delay={400}>
-              <div className="relative flex items-center justify-center py-8">
-                {/* ambient glow */}
-                <div
-                  className="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full blur-3xl opacity-20
-                    transition-colors duration-700 pointer-events-none"
-                  style={{ backgroundColor: CLOTH_COLORS[clothIdx].hex }}
-                />
-
-                {/* person */}
-                <div className="relative z-10 w-48 sm:w-56 md:w-64 transition-all duration-500">
-                  <PersonFigure
-                    type={person}
-                    skinColor={SKIN_TONES[skinIdx].hex}
-                    clothColor={CLOTH_COLORS[clothIdx].hex}
-                  />
-                </div>
-
-                {/* floating colour chips */}
-                {bestColors.slice(0, 3).map((ci, i) => (
-                  <div
-                    key={ci}
-                    className="absolute w-8 h-8 sm:w-10 sm:h-10 rounded-lg shadow-xl float
-                      cursor-pointer hover:scale-125 transition-all duration-300"
-                    onClick={() => setClothIdx(ci)}
-                    style={{
-                      backgroundColor: CLOTH_COLORS[ci].hex,
-                      top: `${12 + i * 25}%`,
-                      [i % 2 === 0 ? "right" : "left"]: "2%",
-                      animationDelay: `${i * 1.5}s`,
-                      transition: "background-color 0.5s ease",
-                    }}
-                    title={`Try ${CLOTH_COLORS[ci].name}`}
-                  />
-                ))}
-
-                {/* person type label */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-center">
-                  <p className="text-[10px] text-gray-600 tracking-[.25em] uppercase font-bold">
-                    {person === "man" ? "👨 Man" : person === "woman" ? "👩 Woman" : "🧒 Kid"}
-                    {" "}in{" "}
-                    <span style={{ color: CLOTH_COLORS[clothIdx].hex }}>
-                      {CLOTH_COLORS[clothIdx].name}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </Reveal>
           </div>
         </div>
-      </section>
+      </div>
+    </Reveal>
+
+    {/* ═══ BEST-MATCH STRIP (below the card) ═══ */}
+    <Reveal delay={600}>
+      <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6">
+        <p className="text-[10px] text-gray-600 tracking-[.3em] uppercase font-semibold whitespace-nowrap">
+          Top Picks for You
+        </p>
+
+        <div className="flex gap-3">
+          {bestColors.map((ci) => (
+            <button
+              key={ci}
+              onClick={() => setClothIdx(ci)}
+              className="group flex items-center gap-2 px-4 py-2.5 rounded-full
+                border border-white/[0.06] bg-white/[0.03] backdrop-blur
+                hover:border-primary/30 hover:bg-primary/[0.05] transition-all duration-300"
+            >
+              <span
+                className="w-4 h-4 rounded-full transition-transform duration-300 group-hover:scale-110"
+                style={{ backgroundColor: CLOTH_COLORS[ci].hex }}
+              />
+              <span className="text-xs text-gray-400 font-medium group-hover:text-white transition-colors">
+                {CLOTH_COLORS[ci].name}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </Reveal>
+  </div>
+
+  {/* ── horizontal rule bottom ── */}
+  <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+</section>
 
       {/* ═══════════════════════════════════════════
            QUOTE 2 — STACKED
@@ -1087,7 +1255,7 @@ export default function Home() {
       <section className="py-24 border-y border-white/5">
         <Reveal>
           <p className="text-center text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter leading-[1] px-4 select-none">
-            <span className="text-white/[.06]">YOUR BODY.</span>{" "}
+            <span className="text-white/20">YOUR BODY.</span>{" "}
             <span className="text-white/20">YOUR CANVAS.</span>{" "}
             <span className="text-primary">YOUR RULES.</span>
           </p>

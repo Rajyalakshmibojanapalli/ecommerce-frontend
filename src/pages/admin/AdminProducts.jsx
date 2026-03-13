@@ -44,7 +44,7 @@ export default function AdminProducts() {
               <tr className="border-b border-dark-border">
                 {["Product", "Price", "Stock", "Category", "Actions"].map((h) => (
                   <th key={h} className={`${h === "Actions" ? "text-right" : "text-left"} 
-                    px-5 py-3 text-sm font-medium text-gray-400`}>{h}</th>
+                    px-5 py-3 text-sm font-medium text-black bg-[#22c55e]`}>{h}</th>
                 ))}
               </tr>
             </thead>

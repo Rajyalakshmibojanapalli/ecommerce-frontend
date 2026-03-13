@@ -98,20 +98,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Addresses"],
     }),
 
-    // Get wishlist
-    getWishlist: builder.query({
-      query: () => "/users/wishlist",
-      providesTags: ["Wishlist"],
-    }),
 
-    // Toggle wishlist
-    toggleWishlist: builder.mutation({
-      query: (productId) => ({
-        url: `/users/wishlist/${productId}`,
-        method: "POST",
-      }),
-      invalidatesTags: ["Wishlist"],
-    }),
+    
   }),
 });
 
@@ -127,6 +115,5 @@ export const {
   useAddAddressMutation,
   useUpdateAddressMutation,
   useDeleteAddressMutation,
-  useGetWishlistQuery,
-  useToggleWishlistMutation,
+  
 } = authApiSlice;

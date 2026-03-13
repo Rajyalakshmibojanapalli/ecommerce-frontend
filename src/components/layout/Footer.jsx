@@ -351,13 +351,13 @@ export default function Footer() {
                 <div>
                   {/* Logo */}
                   <Link to="/" className="inline-flex items-center gap-2.5 group mb-6">
-                    <div
+                    {/* <div
                       className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-emerald-400
                         flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(0,255,136,.3)]
                         transition-all duration-500"
                     >
                       <span className="text-black font-black text-lg">J</span>
-                    </div>
+                    </div> */}
                     <div className="flex flex-col leading-none">
                       <span className="text-xl font-black text-white tracking-tight">
                         JAI<span className="text-primary">MAX</span>

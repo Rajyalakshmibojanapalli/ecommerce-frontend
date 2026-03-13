@@ -17,17 +17,28 @@ export default function Login() {
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await login(form).unwrap();
-      dispatch(setCredentials({ user: res.data.user, token: res.token }));
-      toast.success("Welcome back!");
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await login(form).unwrap();
+    console.log("🔍 Full login response:", res);  // ← Debug: see response structure
+
+    const user = res.data?.user;
+    const token = res.data?.token || res.token;
+
+    dispatch(setCredentials({ user, token }));
+    toast.success("Welcome back!");
+
+    // ✅ Redirect based on role
+    if (user?.role === "admin") {
+      navigate("/admin", { replace: true });
+    } else {
       navigate(from, { replace: true });
-    } catch (err) {
-      toast.error(err.data?.message || "Login failed");
     }
-  };
+  } catch (err) {
+    toast.error(err.data?.message || "Login failed");
+  }
+};
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">

@@ -399,26 +399,15 @@ export default function Navbar() {
             <div className="flex items-center gap-8">
               {/* Logo */}
               <Link to="/" className="flex items-center gap-2.5 group">
-                <div
-                  className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-emerald-400
-                    flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(0,255,136,.3)]
-                    transition-all duration-500 group-hover:scale-105"
-                >
-                  <span className="text-black font-black text-base">J</span>
-                  {/* subtle pulse */}
-                  <div
-                    className="absolute inset-0 rounded-xl border-2 border-primary opacity-0
-                      group-hover:opacity-100"
-                    style={{ animation: "pulse-ring 1.5s ease infinite" }}
-                  />
-                </div>
+                
                 <div className="flex flex-col leading-none">
-                  <span className="text-lg font-black text-white tracking-tight">
+                  {/* <span className="text-lg font-black text-white tracking-tight">
                     JAI<span className="text-primary">MAX</span>
                   </span>
                   <span className="text-[8px] text-gray-500 tracking-[.35em] uppercase font-bold mt-px">
                     Clothing
-                  </span>
+                  </span> */}
+                  <img src="/logo.png" alt="JAIMAX Logo" width={140} height={100} />
                 </div>
               </Link>
 
@@ -757,7 +746,7 @@ export default function Navbar() {
                   </Link>
                   <Link
                     to="/register"
-                    className="px-5 py-2 text-sm bg-primary text-black font-bold rounded-lg
+                    className="px-5 py-2 text-sm bg-primary text-black font-bold rounded-3xl
                       hover:shadow-[0_0_20px_rgba(0,255,136,.25)] transition-all duration-300
                       hover:scale-105"
                   >
